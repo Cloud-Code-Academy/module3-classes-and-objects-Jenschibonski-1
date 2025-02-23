@@ -29,7 +29,7 @@
  * @author Your Name
  */
 
-public with sharing class ClassesObjectsMethods {
+ public with sharing class ClassesObjectsMethods {
     
     /**
      * Question 1
@@ -40,17 +40,18 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<String> practiceStringMethods() {
         // Initialize a String with 'Hello, Salesforce!'
-        
-        // Get the length of the String        
-        // Get a substring of the String of the first 5 characters
-        // Convert the String to lower case
-        
+        String greeting = 'Hello, Salesforce!';
+        String stringSize = String.valueOf(greeting.length());
+        String greet = 'Hello, Salesforce'.substring(0, 5);
+        String lowerString = greeting.toLowerCase();
+     
+        List<String> newList = new List<String>();
         // Return the list with the string data
-        // In the first position add the string length
-        // In the second position add the substring
-        // In the third position add the string in lower case
+        newList.add(stringSize);
+        newList.add(greet);
+        newList.add(lowerString);
 
-        return null; // Replace null with the variable you used to store the result
+        return newList; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -61,15 +62,15 @@ public with sharing class ClassesObjectsMethods {
      * @return A list of boolean values indicating whether the string starts with 'Sales', ends with 'Force', or contains 'Awesome'.
      */
     public static List<Boolean> checkStringContent(String input) {
-        // Initialize a list to store the results
+        List<Boolean> booCheck = new List<Boolean>();
         
-        // Check if the string starts with 'Sales'
-        
-        // Check if the string ends with 'Force'
-        
-        // Check if the string contains 'Awesome'
-        
-        return null; // Replace null with the variable you used to store the result
+        Boolean startCheck = input.startsWith('Sales');
+        Boolean endCheck = input.endsWith('Force');
+        Boolean containItem = input.contains('Awesome');
+        booCheck.add(startCheck);
+        booCheck.add(endCheck);
+        booCheck.add(containItem);
+        return booCheck;
     }
 
     /**
@@ -80,17 +81,19 @@ public with sharing class ClassesObjectsMethods {
      * @return A string consisting of only unique words from the input sentence.
      */
     public static String removeDuplicateWords(String sentence) {
-        // Split the sentence into words
-
-        // Create a set to store the unique words
-
-        // Add each word to the set
-
-        // Join the unique words back into a sentence
-
-        // Return the sentence with unique words
-        return null; // Replace null with the variable you used to store the result
-    }
+        
+            List<String> sentenceSplit = sentence.split(' ');
+            
+            Set<String> uniqueWords = new Set<String>();
+            for (String words : sentenceSplit){
+           
+            uniqueWords.add(words);
+            
+             } 
+             return String.join(new List<String>(uniqueWords), ' ');  
+            
+        }
+    
 
     /**
      * Question 4
@@ -226,20 +229,20 @@ public with sharing class ClassesObjectsMethods {
      * where you need to manipulate and manage book information.
      */
     public class Book {
-        // Declare three public instance variables - title, author, pages
-        // title
+       //  Declare three public instance variables - title, author, pages
+       public String title;
+       public String author;
+       public Integer pages;
         // author
         // pages
-    
-        // Book constructor to initialize the title and author
-        public Book() {
-            // Initialize the title and author
+        public Book(String title, String author) {
+           this.title = title; 
+           this.author = author;
         }
     
-        // Method that returns the details of the book
         public String getBookDetails() {
-            // return A string containing the details of the book in the format "Title: <title>, Author: <author>"
-            return null; // Replace null with the variable you used to store the result
+            String bookDeets = 'Title: ' + this.title  +  ',' + ' Author: ' + this.author;   // return A string containing the details of the book in the format "Title: <title>, Author: <author>"
+            return bookDeets; // Replace null with the variable you used to store the result
         }
     }
     
@@ -252,12 +255,16 @@ public with sharing class ClassesObjectsMethods {
      */
     public static String createAndGetBookDetails() {
         // Create a Book object with title "A Brief History of Time" and author "Stephen Hawking"
-
-        // Call the getBookDetails method on the book object to get the details of the book
-
-        // Return the details of the book
-        return null; // Replace null with the variable you used to store the result
+         
+        Book bookobj = new Book('A Brief History of Time', 'Stephen Hawking');
+        
+        
+        String getBookDetails = bookobj.getBookDetails();
+        
+        
+        return getBookDetails;
     }
+
 
     /**
      * Question 13
@@ -270,18 +277,20 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<Book> generateBookList(Book myBook1) {
         // Create a list of books
-
+        List <Book> coolBooks = new List<Book>();
         // Update the title and author of myBook1
-
+        myBook1.title ='Harry Potter and the Chamber of Secrets';
+        myBook1.author ='J.K. Rowling';
         // Update the pages for myBook1 to 352
-
+        myBook1.pages = 352;
         // Create a new Book object with title "A Brief History of Time" and author "Stephen Hawking"
-
+        Book myBook2 = new Book('A Brief History of Time','Stephen Hawking');
         // Update the pages for A Brief History of Time to 256
-
+        myBook2.pages = 256;
         // Add the book to the list
-        
-        return null; // Replace null with the variable you used to store the result      
+        coolBooks.add(myBook1);
+        coolBooks.add(myBook2);
+        return coolBooks; // Replace null with the variable you used to store the result      
     }
 
 
