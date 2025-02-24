@@ -26,7 +26,7 @@
  * Math class: https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_math.htm
  * Classes: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_understanding.htm
  *
- * @author Your Name
+ * @author Jennifer Schibonski
  */
 
  public with sharing class ClassesObjectsMethods {
@@ -39,14 +39,13 @@
      * @return A list containing the length of the string, a substring of the string, and the string in lower case.
      */
     public static List<String> practiceStringMethods() {
-        // Initialize a String with 'Hello, Salesforce!'
+        
         String greeting = 'Hello, Salesforce!';
         String stringSize = String.valueOf(greeting.length());
         String greet = 'Hello, Salesforce'.substring(0, 5);
         String lowerString = greeting.toLowerCase();
      
         List<String> newList = new List<String>();
-        // Return the list with the string data
         newList.add(stringSize);
         newList.add(greet);
         newList.add(lowerString);
@@ -67,9 +66,11 @@
         Boolean startCheck = input.startsWith('Sales');
         Boolean endCheck = input.endsWith('Force');
         Boolean containItem = input.contains('Awesome');
+        
         booCheck.add(startCheck);
         booCheck.add(endCheck);
         booCheck.add(containItem);
+        
         return booCheck;
     }
 
@@ -85,8 +86,8 @@
             List<String> sentenceSplit = sentence.split(' ');
             
             Set<String> uniqueWords = new Set<String>();
+            
             for (String words : sentenceSplit){
-           
             uniqueWords.add(words);
             
              } 
@@ -105,16 +106,19 @@
      */
     public static Integer countVowels(String str) {
         // Initialize the result Integer
-
-        /*
-        for () {
-            // get individual characters from the string - hint use substring or split
-            // check if the character is a vowel
-            // if it is a vowel, increment the result Integer
+        Integer vowelAmount = 0;
+        
+        for (Integer i = 0; i < str.length(); i++ ) {
+           String vowels = 'aeiou';
+           String charac = str.substring(i, i + 1);
+            
+            if(vowels.indexOf(charac) != -1) {
+                vowelAmount++;
+            }
         }
-        */
 
-        return null; // Replace null with the variable you used to store the result
+            return vowelAmount;
+
     }
 
     /**
@@ -127,18 +131,18 @@
     public static String findTheScientist() {
         // The list of scientists' names
         List<String> scientistNames = new List<String>{'Tim Berners-Lee', 'Alan Turing', 'Grace Hopper', 'Donald Knuth', 'Guido van Rossum', 'Ken Thompson', 'Stephen Hawking'};
-
-        // The variable to store the concatenated string
-
-        // Loop through the list of scientists' names
-
-            // If the name doesn't contain the letter 'G', skip this iteration
-
-            // Add the name to the result string, followed by a comma
-
-        // Remove the last comma from the result string
-
-        return null; // Replace null with the variable you used to store the result
+        String newString = '';
+        
+        for(String name : scientistNames){
+            
+        if(name.toUpperCase().contains('G')){
+            if (newString != ''){
+                newString += ',';
+            }
+        newString +=name;
+        }
+    }
+        return newString;
     }
 
     /**
@@ -150,12 +154,12 @@
      * @return The absolute value of the difference
      */
     public static Double calculateDifferenceOfSquares(Double a, Double b) {
-        // Square the input numbers using the Math.pow() function
-
-        // Calculate the absolute difference using Math.abs() function
-
-        // Return the result
-        return null; // Replace null with the variable you used to store the result
+        Double a1 = Math.pow(a, 2);
+        Double b1 = Math.pow(b,2);
+        
+        Double c1 = Math.abs(a1 - b1);
+        
+        return c1; 
     }
 
     /**
@@ -165,10 +169,9 @@
      * @return A integer between 50 and 100.
      */
     public static Integer generateRandomNumber() {
-        // Use Math class to generate number between 50 and 100
-
-        // Return the random integer
-        return null; // Replace null with the variable you used to store the result
+        Integer result = 50 +(Integer)(Math.random()* 51);
+       
+        return result;
     }
 
     /**
@@ -178,12 +181,9 @@
      * @return The current date in the current user locale format.
      */
     public static String getCurrentDate() {
-        // Get the todays date
+        Date myDate = Date.today();
 
-        // Format the current date
-
-        // Return the result
-        return null; // Replace null with the variable you used to store the result
+        return myDate.format(); 
     }
 
     /**
@@ -193,15 +193,21 @@
      * @return The number of the day of the week for the given date.
      */
     public static String getDayOfWeek(DateTime dt) {
-        // Define a map of day of the week as a key and day number as the value
-        // Monday = 1, Tuesday = 2, etc.
-
+        Map<String, Integer> dayOfWeek = new Map<String, Integer>();
+        dayOfWeek.put('Monday', 1);
+        dayOfWeek.put('Tuesday', 2);
+        dayOfWeek.put('Wednesday', 3);
+        dayOfWeek.put('Thursday', 4);
+        dayOfWeek.put('Friday', 5);
+        dayOfWeek.put('Saturday', 6);
+        dayOfWeek.put('Sunday', 7);
         // Get the day name using .format('EEEE');
+        String dayName = dt.format('EEEE');
 
         // Get the day number from the map using the day name
-
+        String getDayName = dayOfWeek.get(dayName).toString();
         // Return the result as a string
-        return null; // Replace null with the variable you used to store the result
+        return getDayName;
     }
 
 
@@ -216,9 +222,12 @@
      */
     public static Integer calculateYearDifference(Date d1, Date d2) {
 
-        // Subtract the difference in years
-
-        return null; // Replace null with the variable you used to store the result
+        if(d1 == null || d2 == null){
+            return null;}
+            // Subtract the difference in years
+            Integer result = d1.year() - d2.year();
+            Integer positiveNumber = Math.abs(result);
+            return  positiveNumber;
     }
 
     /**
@@ -302,23 +311,38 @@
      * where you need to manipulate and manage person information.
      */
     public class Person {
-        // Declare private two instance variables - (TEXT) name and (Number) age
         
-        // Constructor to initialize the name and age
+        private String name;
+        private Integer age;
     
-        // Method introduceYourself that returns the details of the person        
-        // Return a string in the format "Hello, my name is <name> and I am <age> years old."
-        // For example, introduceYourself() should return a string like "Hello, my name is John Doe and I am 28 years old."
-
-        // Getter method that returns the name of the person
-
-        // Getter method that returns the age of the person
-
-        // Setter method that sets the name of the person
-
-        // Setter method that sets the age of the person
+        public Person(String name, Integer age) {
+            this.name = name;
+            this.age = age;
+        }
+    
+          
+        public String introduceYourself() {
+            String intro = 'Hello, my name is ' + this.name + ' and I am ' + this.age + ' years old.';
+            return intro;
+        }
+    
+        public String getName() {
+            return this.name;
+        }
+    
+        public Integer getAge() {
+            return this.age;
+        }
+    
+        public void setName(String name) {
+            this.name = name;
+        }
+    
+        public void setAge(Integer age) {
+            this.age = age;
+        }
     }
-
+    
     /**
      * Question 15
      * Create a Person object and returns the details of the person.
@@ -328,16 +352,19 @@
 
     public static List<String> personDetails() {
         List<String> results = new List<String>();
-        // Create a new instance of Person class
-        // Name the person 'John Doe' and set the age to 28
-
-        // Add the details of the person using the introduceYourself method
-
-        // Get the name of the person using the getter method and add it to the list
-
-        // Get the age of the person using the getter method and add it to the list
         
-        return null; // Replace null with the variable you used to store the result
+        Person newPerson = new Person ('John Doe', 28);
+        // Add the details of the person using the introduceYourself method
+        String newIntro = newPerson.introduceYourself();
+        // Get the name of the person using the getter method and add it to the list
+        String newName = newPerson.getName();
+        // Get the age of the person using the getter method and add it to the list
+        String newAge = newPerson.getAge().toString();
+         // Replace null with the variable you used to store the result
+        results.add(newIntro);
+        results.add(newName);
+        results.add(newAge);
+    Return results;    
     }
 
     /**
@@ -349,9 +376,9 @@
      */
     public static Person createPerson(String name, Integer age) {
         // Create a new instance of the Person class using the provided name and age
-        
-        // Return the new instance of the Person class
-        return null; // Replace null with the variable you used to store the result
+        Person newPerson1 = new Person(name, age);
+    
+        return newPerson1; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -364,16 +391,19 @@
      * @return A list of new Person objects.
      */
     public static List<Person> createMultiplePersons(List<String> names, Integer age) {
-
+        List<Person> resultList = new List<Person>();
         // Loop through each name in the provided list of names
-            // Create a new Person object for each name
+        for (String nameList : names) {
+           
+            Person newPerson = new Person(nameList, age);
             
-            // Add the new Person object to the list of Person objects
-        
-        
-        // Return the list of Person objects
-        return null; // Replace null with the variable you used to store the result
-    }
+            
+            resultList.add(newPerson);
+        }
+    
+        return resultList;
+    } 
+    
 
 
     /**
@@ -387,6 +417,15 @@
      * @return The Person object of the older person.
      */
     public static Person getOlderPerson(Person person1, Person person2) {
-        return null; // Replace null with the variable you used to store the result
+        
+        if (person1.age > person2.age){
+            return person1;
+        }  else if(person2.age > person1.age){
+            return person2;
+        } else{
+            return person1;
+        }
+        
+         // Replace null with the variable you used to store the result
     }
 }
